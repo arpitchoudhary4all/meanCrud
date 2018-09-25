@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CRUD application</title>
+    <link rel="stylesheet" href="stylesheet/main.css">
+    <script src="js/task.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+    <script src="js/module.js"></script>
+    <script src="js/factory.js"></script>
+    <script src="js/controller.js"></script>
+</head>
+<body ng-app="myapp" ng-controller="myctrl">
+   <div>
+    <fieldset>
+        <legend>CRUD</legend>
+        
+        <form ng-submit="sub()">
+        <label for="">name</label>
+        <input type="text" placeholder="enter name" ng-model="prod.name">
+        <br>
+        <label for="">desc</label>
+        <textarea name="" id="" cols="20" rows="6" ng-model="prod.desc"></textarea>
+        <br>
+        <button ng-click="addRecord()" type="submit">Add</button>
+        <button ng-click="deleteRecord()">Delete</button>
+        <button ng-click="findRecord()">Search</button>
+<!--        <button ng-click="fetchRecord()">Fetch</button>-->
+        <button ng-click="updateRecord()">Update</button>
+        <button ng-click="fetchRecord()">Fetch</button>
+        </form>
+    </fieldset>
+    </div>
+    
+    <div>
+        <fieldset>
+            <legend>List</legend>
+            Total Fields:{{totalCount()}}
+            Selected Field:{{selectedField()}}
+            <table border="1">
+                <thead>
+                   <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Desc</th>
+                    <th>Operations</th>
+                </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="task in tasks" ng-class="{'red':task.markForDeletion,'green':task.markForEdit}">
+                        <td>{{task.id}}</td>
+                        <td>{{task.name}}</td>
+                        <td>{{task.desc}}</td>
+                        <td><img src="images/delete.png" ng-click="markForDelete(task.id)" alt="">
+                        <img src="images/edit.png" ng-click="editRecord(task)" alt=""></td>
+                    </tr>
+                </tbody>
+            </table>
+        </fieldset>
+    </div>
+</body>
+</html>
